@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+/* Moroccan Traditional Theme for Aura-Sadaqa */
+@theme inline {
+  /* Moroccan Color Palette */
+  --color-lantern-gold: #d4af37;
+  --color-lantern-gold-light: #f4d03f;
+  --color-lantern-gold-dark: #b8941f;
+  
+  --color-night-blue: #0f1729;
+  --color-night-blue-light: #1a2942;
+  --color-night-blue-dark: #070b14;
+  
+  --color-terracotta: #d2691e;
+  --color-terracotta-light: #e88a4f;
+  --color-terracotta-dark: #a0522d;
+  
+  --color-emerald: #059669;
+  --color-emerald-light: #10b981;
+  --color-emerald-dark: #047857;
+  
+  --color-sand: #f5e6d3;
+  --color-sand-light: #faf5ed;
+  --color-sand-dark: #e8d4b8;
+  
+  --color-crescent: #ffd700;
+  --color-mosque-green: #006b3f;
+  
+  /* Semantic Colors */
+  --color-background: var(--color-sand-light);
+  --color-foreground: var(--color-night-blue);
+  --color-primary: var(--color-emerald);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--color-lantern-gold);
+  --color-secondary-foreground: var(--color-night-blue);
+  --color-accent: var(--color-terracotta);
+  --color-accent-foreground: #ffffff;
+  --color-muted: var(--color-sand);
+  --color-muted-foreground: #6b7280;
+  --color-border: #e5e7eb;
+  --color-input: #e5e7eb;
+  --color-ring: var(--color-emerald);
+  
+  /* Card & Glassmorphism */
+  --color-card: #ffffff;
+  --color-card-foreground: var(--color-night-blue);
+  
+  /* Destructive */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  
+  /* Animations */
+  --animate-sadaqa-pulse: sadaqa-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-lantern-glow: lantern-glow 3s ease-in-out infinite;
+  --animate-crescent-float: crescent-float 4s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.4s ease-out;
+}
+
+/* Dark Mode - Ramadan Night Theme */
+@media (prefers-color-scheme: dark) {
+  @theme inline {
+    --color-background: var(--color-night-blue-dark);
+    --color-foreground: var(--color-sand-light);
+    --color-card: var(--color-night-blue);
+    --color-card-foreground: var(--color-sand-light);
+    --color-muted: var(--color-night-blue-light);
+    --color-muted-foreground: #9ca3af;
+    --color-border: #374151;
+    --color-input: #374151;
+  }
+}
+
+/* Custom Animations */
+@keyframes sadaqa-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes lantern-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+  }
+}
+
+@keyframes crescent-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base Styles */
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0a;
+  color: var(--color-foreground);
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font Variables */
+.font-serif {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 41, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Moroccan Pattern Background */
+.moroccan-pattern {
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212, 175, 55, 0.05) 35px, rgba(212, 175, 55, 0.05) 70px),
+    repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(5, 150, 105, 0.05) 35px, rgba(5, 150, 105, 0.05) 70px);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-emerald-dark);
+}
