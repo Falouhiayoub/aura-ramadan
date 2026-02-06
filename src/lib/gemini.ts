@@ -27,7 +27,7 @@ export function getChatModel() {
  */
 export function getEmbeddingModel() {
     return genAI.getGenerativeModel({
-        model: "text-embedding-004"
+        model: "gemini-embedding-001"
     });
 }
 
@@ -37,11 +37,16 @@ export function getEmbeddingModel() {
 export async function generateEmbedding(text) {
     try {
         const model = getEmbeddingModel();
-        const result = await model.embedContent(text);
+        // Use type casting because outputDimensionality is supported by the API 
+        // but might not be present in the version of the SDK's TypeScript definitions.
+        const result = await model.embedContent({
+            content: { role: "user", parts: [{ text }] },
+            outputDimensionality: 768,
+        } as any);
         return result.embedding.values;
     } catch (error) {
         console.error("Error generating embedding:", error);
-        throw new Error("Failed to generate embedding");
+        throw new Error(`Failed to generate embedding: ${error.message || 'Unknown error'}`);
     }
 }
 

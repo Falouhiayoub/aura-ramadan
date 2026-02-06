@@ -29,6 +29,11 @@ export async function getIndex() {
  */
 export async function upsertVectors(vectors) {
     try {
+        if (!vectors || vectors.length === 0) {
+            console.warn("[Pinecone] Warning: Attempted to upsert an empty vectors array. Skipping.");
+            return { success: true, count: 0 };
+        }
+
         const index = await getIndex();
         console.log(`[Pinecone] Upserting ${vectors.length} vectors...`);
 
@@ -37,7 +42,9 @@ export async function upsertVectors(vectors) {
             console.log(`[Pinecone] Vector dimension: ${vectors[0].values.length}`);
         }
 
-        const result = await index.upsert(vectors);
+        // IMPORTANT: For @pinecone-database/pinecone v7.0.0, 
+        // the upsert method expects { records: [] }
+        const result = await index.upsert({ records: vectors });
         console.log(`[Pinecone] Upsert successful:`, result);
         return { success: true, count: vectors.length };
     } catch (error) {
